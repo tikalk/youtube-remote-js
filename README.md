@@ -29,3 +29,17 @@ We using branch per feature workflow [1](http://randyfay.com/content/rebase-work
 
 Coding style
 ---
+
+### Install preparations
+git clone https://github.com/tikalk/youtube-remote-js.
+
+
+0) Install node.js
+
+1) npm -g install sails
+2) npm install -g yo
+3) To start sails:
+go to project directory & run
+	npm install
+	bower install
+	sails lift
