@@ -1,0 +1,21 @@
+{
+  "name": "youtube-remote-js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/tikalk/youtube-remote-js",
+  "authors": [
+    "orizens <farhioren@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer-elements": "~0.1.1",
+    "polymer-ui-elements": "~0.1.1",
+    "polymer": "~0.1.1"
+  }
+}
