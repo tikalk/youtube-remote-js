@@ -1,10 +1,7 @@
-
-=======
 youtube-remote-js
 =================
-
-a youtube application with a remote (on 2nd client) that controls it using fullstack javascript
-
+A youtube application with a remote (on 2nd client) that controls it using fullstack javascript
+[Please follow the Prepare instructions](https://github.com/tikalk/youtube-remote-js/wiki/Prepare)
 
 Git workflow
 -----
