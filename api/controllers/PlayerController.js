@@ -14,23 +14,19 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-function findPlayer(id) {
-    var playerCache = {};
-    return playerCache[id];
-}
+var socketService = require('../services/socket');
+var findPlayer = socketService.findPlayer;
 function sendCommand(res, command, playerId, vidId) {
-    //todo: find if there is an active player
-    //todo: if player exists send the command to play to the player, send back a confirmation to remote
     var playerSocket = findPlayer(playerId);
-
     if (playerSocket) {
-        //todo: send command to playersocket
+
         var cmd = {
             command: command,
-            playerId: playerSocket.id,
+            playerId: playerSocket.uuid,
             videoId: vidId
         };
-        playerSocket.emit('command', cmd);
+        console.log('Sent command %s to player %s', command, playerSocket.uuid);
+        playerSocket.socket.emit('command', cmd);
         return res.json(cmd);
     }
     else {
