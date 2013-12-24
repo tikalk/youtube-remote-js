@@ -26,13 +26,7 @@ var youtubeHandler = GapiHandler.create({
     apis: 'youtube.search.list'
 });
 
-module.exports = {
-    sockettest: function sockettest(req, res){
-        return res.view({
-          title: "the socket test module..."
-        });
-    },
-    
+module.exports = { 
   index: function function_name (req, res) {
     return res.view({
       title: "the search module..."
