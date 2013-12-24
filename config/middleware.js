@@ -56,8 +56,8 @@ module.exports = {
             ));
 
             passport.use(new FacebookStrategy({
-                    clientID: "YOUR_CLIENT_ID",
-                    clientSecret: "YOUR_CLIENT_SECRET",
+                    clientID: "694616850571004",
+                    clientSecret: "72caed6aade4987e708d3416e5b12610",
                     callbackURL: "http://localhost:1337/auth/facebook/callback"
                 },
                 verifyHandler
