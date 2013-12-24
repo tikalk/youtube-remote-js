@@ -1,24 +1,31 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<polymer-element name="youtube-media" noscript>
+<polymer-element name="youtube-media" attributes="model">
   <template>
     
   	<div class="panel">
-  	<h2>title of media</h2>
+  	<h2>{{model.snippet.title}}</h2>
     <p>
-      <img src="http://placehold.it/200x200">
-      the description
+      <img src="{{model.snippet.thumbnails.default.url}}">
+      {{model.snippet.description}}
     </p>
     
   </div>
 
 
 
-  <script>
-  	
-  	Polymer('youtube-media');
-
-  </script>
 
   </template>
+  <script>
+  	
+  	Polymer('youtube-media', {
+      ready: function(){
+      },
+      modelChanged: function(oVal, nVal){
+        console.log('new value', nVal);
+        this.model = nVal;
+      }
+    });
+
+  </script>
 </polymer-element>

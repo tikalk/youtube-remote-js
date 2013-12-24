@@ -1,0 +1,69 @@
+<polymer-element name="youtube-list">
+  <style type="text/css">
+    .youtube-media img {
+      float: left;
+    }
+  </style>
+  <template>
+    <form id="search">  
+      <div class="panel">
+        <input id="query" class="search" type="search" placeholder="search youtube..."></input>
+      </div>
+    </form>
+
+    <div>
+      <template id="yt-list" repeat="{{item in items}}">
+          <div class="panel youtube-media">
+        <h2>{{item.snippet.title}}</h2>
+        <p>
+          <img src="{{item.snippet.thumbnails.default.url}}">
+          {{item.snippet.description}}
+        </p>
+        <button on-click="{{handleClick}}" videoid="{{item.id.videoId}}">play</button>
+      </template>
+    </div>
+  </template>
+  <script>
+    Polymer('youtube-list', {
+      ready: function() {
+        var that = this;
+        this.items = [{
+            snippet: {
+              title: 'loading...',
+              description: ''
+            }
+          }
+        ];
+        this.$.search.addEventListener('submit', function(ev){
+          that.query(that.$.query.value);
+          ev.preventDefault();
+        });
+        this.query('pearl jam');
+      },
+
+      handleClick: function (ev) {
+        this.play(ev.target.getAttribute('videoid'));
+      },
+
+      query: function(q){
+        var that = this;
+        $.ajax({
+          url: '/search/list?q=' + q,
+          success: function(res){  
+            that.items = res.items;
+            }
+        })
+      },
+
+      play: function(videoId){
+        $.ajax({
+          type: 'POST',
+          url: '/player/play/uuid',
+          data: {
+            vidId: videoId
+          }
+        })
+      }
+    });
+  </script>
+</polymer-element>
