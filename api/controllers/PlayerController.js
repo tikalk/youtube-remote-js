@@ -21,18 +21,17 @@ function findPlayer(id) {
 function sendCommand(res, command, playerId, vidId) {
     //todo: find if there is an active player
     //todo: if player exists send the command to play to the player, send back a confirmation to remote
-    //todo if player does not exist, send error
     var playerSocket = findPlayer(playerId);
 
     if (playerSocket) {
         //todo: send command to playersocket
-        return res.json(
-            {
-                command: command,
-                playerId: playerSocket.id,
-                videoId: vidId
-            }
-        );
+        var cmd = {
+            command: command,
+            playerId: playerSocket.id,
+            videoId: vidId
+        };
+        playerSocket.emit('command', cmd);
+        return res.json(cmd);
     }
     else {
         return res.json(
