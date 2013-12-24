@@ -396,6 +396,9 @@ module.exports = function (grunt) {
     },
 
     watch: {
+      options: {
+        livereload: true
+      },
       api: {
 
         // API files to watch:
@@ -408,6 +411,9 @@ module.exports = function (grunt) {
 
         // When assets are changed:
         tasks: ['compileAssets', 'linkAssets']
+      },
+      views: {
+        files: ['views/**/*']
       }
     }
   });
@@ -463,7 +469,8 @@ module.exports = function (grunt) {
     'sails-linker:devTpl',
     'sails-linker:prodJsJADE',
     'sails-linker:prodStylesJADE',
-    'sails-linker:devTplJADE'
+    'sails-linker:devTplJADE',
+    'watch'
   ]);
 
   // When API files are changed:

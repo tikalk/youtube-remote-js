@@ -20,6 +20,7 @@
       as you would normally: using <link/> tags.
       
     -->
+    <link rel="stylesheet" type="text/css" href="/bower_components/foundation/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="/bower_components/foundation/css/foundation.css">
     <!--
 
@@ -32,6 +33,8 @@
       If necessary, shut down and then lift your app again.
       
     -->
+
+    <script src="//localhost:35729/livereload.js"></script>
 
   </head>
 
@@ -62,6 +65,11 @@
     <!-- Your scripts here? -->
     <!-- Your scripts here? -->
 
+    <script src="/bower_components/jquery/jquery.js"></script>
+    <script src="/bower_components/foundation/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
 
     <!--
 
