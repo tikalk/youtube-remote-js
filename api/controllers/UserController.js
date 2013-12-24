@@ -18,6 +18,79 @@
 module.exports = {
     
   
+  /**
+   * Action blueprints:
+   *    `/user/create`
+   */
+   create: function (req, res) {
+   console.log("print req:", req);
+   // var userId=req.param('userId');
+   // var 	
+    
+    // Send a JSON response
+
+    // For example
+  User.create({
+  userid: '333',
+  videolist: ["hobbit","soccer","node busters"]
+  }).done(function(err, user) {
+
+  // Error handling
+  if (err) {
+    return console.log(err);
+
+  // The User was created successfully!
+  }else {
+    console.log("User created:", user);
+  }
+});
+
+
+    return res.json({
+      hello: 'world'
+    });
+  },
+
+
+  /**
+   * Action blueprints:
+   *    `/user/destroy`
+   */
+   destroy: function (req, res) {
+    
+    // Send a JSON response
+    return res.json({
+      hello: 'world'
+    });
+  },
+
+
+  /**
+   * Action blueprints:
+   *    `/user/tag`
+   */
+   tag: function (req, res) {
+    
+    // Send a JSON response
+    return res.json({
+      hello: 'world'
+    });
+  },
+
+
+  /**
+   * Action blueprints:
+   *    `/user/like`
+   */
+   like: function (req, res) {
+    
+    // Send a JSON response
+    return res.json({
+      hello: 'world'
+    });
+  },
+
+
 
 
   /**
