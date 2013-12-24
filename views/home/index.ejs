@@ -1,36 +1,36 @@
-    <div class="row">
-      <div class="large-12 columns">
+		<div class="row">
+			<div class="large-12 columns">
 
-        <!-- Navigation -->
-        <nav class="top-bar" data-topbar>
-            <ul class="title-area">
-              <!-- Title Area -->
-              <li class="name">
-                <h1>
-                  <a href="#">
-                    Youtube Remote
-                </a>
-            </h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-    </ul>
+				<!-- Navigation -->
+				<nav class="top-bar" data-topbar>
+						<ul class="title-area">
+							<!-- Title Area -->
+							<li class="name">
+								<h1>
+									<a href="#">
+										Youtube Remote
+								</a>
+						</h1>
+				</li>
+				<li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+		</ul>
 
-    <section class="top-bar-section">
-      <ul class="left">
-        <li><a href="/remote">remote</a></li>
-        <li><a href="/screen">screen</a></li>
-    </ul>
+		<section class="top-bar-section">
+			<ul class="left">
+				<li><a href="/remote">remote</a></li>
+				<li><a href="/screen">screen</a></li>
+		</ul>
 
-    <ul class="right">
-        <li class="search">
-          <form>
-            <input type="search">
-        </form>
-    </li>
+		<ul class="right">
+				<li class="search">
+					<form>
+						<input type="search">
+				</form>
+		</li>
 
-    <li class="has-button">
-      <a class="small button" href="#">Search</a>
-  </li>
+		<li class="has-button">
+			<a class="small button" href="#">Search</a>
+	</li>
 </ul>
 </section>
 </nav>
@@ -42,20 +42,20 @@
 
 
 <div class="row">
-    <div class="large-12 columns">
+		<div class="large-12 columns">
 
 
-        <!-- Mobile Header -->
+				<!-- Mobile Header -->
 
 
-        <div class="row">
-          <div class="small-12 show-for-small"><br>
-            <img src="http://placehold.it/1000x600&text=For Small Screens" />
-        </div>
-    </div>
+				<div class="row">
+					<div class="small-12 show-for-small"><br>
+						<img src="http://placehold.it/1000x600&text=For Small Screens" />
+				</div>
+		</div>
 
 
-    <!-- End Mobile Header -->
+		<!-- End Mobile Header -->
 
 </div>
 </div>
@@ -63,44 +63,57 @@
 
 
 <div class="row">
-    <div class="large-12 columns">
-      <div class="row">
 
-        <!-- Content -->
 
-        <div class="large-8 columns">
-          <div class="panel radius">
+		<div class="large-12 columns">
+			<div class="row">
 
-              <div class="row">
-                  <div class="large-6 small-6 columns">
+				<!-- Content -->
 
-                    <h4>Remote</h4><hr/>
-                    <h5 class="subheader">
-                        <a href="#" class="small radius button">Control</a>
-                    </h5>
+				<div class="large-8 columns">
+					<div class="panel radius">
 
-                    <h4>Screen</h4><hr/>
-                    <h5 class="subheader">
-                        <a href="#" class="small radius button">Watch it!</a>
-                    </h5>
+							<div class="row">
+									<div class="large-6 small-6 columns">
 
-                </div>
-                <div class="large-6 small-6 columns">
-                    <p>
-                        watch &amp; control youtube videos on any device
-                    </p>
-                </div>
+										<h4>Remote</h4><hr/>
+										<h5 class="subheader">
+												<a href="#" class="small radius button">Control</a>
+										</h5>
 
-            </div>
-        </div>
-    </div>
+										<h4>Screen</h4><hr/>
+										<h5 class="subheader">
+												<a href="#" class="small radius button">Watch it!</a>
+										</h5>
 
-    <div class="large-4 columns hide-for-small">
+								</div>
+								<div class="large-6 small-6 columns">
+										<p>
+												watch &amp; control youtube videos on any device
+										</p>
+								</div>
 
-      <h4>Credits</h4><hr/>
-      <p>
-          Tikal's Javascript Team
-      </p>
+						</div>
+				</div>
+		</div>
+
+		<h2>Hi <%= user.name %></h1>
+		<a class="btn" href="/logout">Logout</a>
+		<table class="table">
+			<% for(key in user.toJSON() ) { %>
+			<tr>
+				<td><%= key %>: </td>
+				<td class="boxy"><%= user[key] %></td>
+			</tr>
+			<% } %>
+		</table>
+		
+		<div class="large-4 columns hide-for-small">
+
+			<h4>Credits</h4><hr/>
+			<p>
+					Tikal's Javascript Team
+			</p>
 
 </div>
 
@@ -113,18 +126,18 @@
 <!-- Footer -->
 
 <footer class="row">
-    <div class="large-12 columns">
-      <hr>
-      <div class="row">
-        <div class="large-6 columns">
-          <p>© Tikal Knowledge</p>
-      </div>
-      <div class="large-6 columns">
-          <ul class="inline-list right">
-            <li><a href="http://tikalk.com">Tikal</a></li>
-            <li><a href="http://tikalk.com/js">Tikal Javascript Page</a></li>
-        </ul>
-    </div>
+		<div class="large-12 columns">
+			<hr>
+			<div class="row">
+				<div class="large-6 columns">
+					<p>© Tikal Knowledge</p>
+			</div>
+			<div class="large-6 columns">
+					<ul class="inline-list right">
+						<li><a href="http://tikalk.com">Tikal</a></li>
+						<li><a href="http://tikalk.com/js">Tikal Javascript Page</a></li>
+				</ul>
+		</div>
 </div>
 </div>
 </footer>

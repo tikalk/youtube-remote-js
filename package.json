@@ -9,9 +9,11 @@
         "sails-disk": "~0.9.0",
         "ejs": "0.8.4",
         "optimist": "0.3.4",
-        "passport": "~0.1.16",
-        "passport-local": "~0.1.6",
-        "bcrypt": "~0.7.6",
+		"passport": "0.1.17",
+        "passport-github": "0.1.5",
+		"passport-google-oauth": "0.1.5",
+		"sails-mongo": "0.9.3",
+		"passport-facebook": "~1.0.2",
 		"googleapis": "~0.4.7"
     },
     "scripts": {

@@ -1,81 +1,91 @@
 /**
- * AuthControllerController
+ * AuthController
  *
- * @module      :: Controller
- * @description	:: A set of functions called `actions`.
- *
- *                 Actions contain code telling Sails how to respond to a certain type of request.
- *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
- *
- *                 You can configure the blueprint URLs which trigger these actions (`config/controllers.js`)
- *                 and/or override them with custom routes (`config/routes.js`)
- *
- *                 NOTE: The code you write here supports both HTTP and Socket.io automatically.
- *
- * @docs        :: http://sailsjs.org/#!documentation/controllers
+ * @module		:: Controller
+ * @description	:: Contains logic for handling requests.
  */
 
 var passport = require('passport');
-module.exports = {
- 
-	login: function (req, res) {
-		res.view();
-	},
 
-	process: function(req, res){
-		passport.authenticate('local', function(err, user, info) {
-			if ((err) || (!user)) {
-				return res.send({
-					message: 'login failed'
-				});
-				res.send(err);
-			}
-			req.logIn(user, function(err) {
-				if (err) res.send(err);
-				return res.send({
-					message: 'login successful'
-				});
-			});
-		})(req, res);
-	},
-	
-	logout: function (req,res){
-		req.logout();
-		res.send('logout successful');
-	}
+var AuthController = {
+
+    index: function (req, res) {
+        res.view();
+    },
+
+    logout: function (req, res) {
+        req.logout();
+        res.redirect('/');
+    },
+
+    'github': function (req, res) {
+        passport.authenticate('github', { failureRedirect: '/login' },
+            function (err, user) {
+                req.logIn(user, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.view('500');
+                        return;
+                    }
+
+                    res.redirect('/');
+                    return;
+                });
+            })(req, res);
+    },
+
+    'github/callback': function (req, res) {
+        passport.authenticate('github',
+            function (req, res) {
+                res.redirect('/');
+            })(req, res);
+    },
+
+    'facebook': function (req, res) {
+        passport.authenticate('facebook', { failureRedirect: '/login' },
+            function (err, user) {
+                req.logIn(user, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.view('500');
+                        return;
+                    }
+
+                    res.redirect('/');
+                    return;
+                });
+            })(req, res);
+    },
+
+    'facebook/callback': function (req, res) {
+        passport.authenticate('facebook',
+            function (req, res) {
+                res.redirect('/');
+            })(req, res);
+    },
+
+    'google': function (req, res) {
+        passport.authenticate('google', { failureRedirect: '/login', scope:['https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.profile'] },
+            function (err, user) {
+                req.logIn(user, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.view('500');
+                        return;
+                    }
+
+                    res.redirect('/');
+                    return;
+                });
+            })(req, res);
+    },
+
+    'google/callback': function (req, res) {
+        passport.authenticate('google',
+            function (req, res) {
+                res.redirect('/');
+            })(req, res);
+    }
+
 };
- 
-/**
- * Sails controllers expose some logic automatically via blueprints.
- *
- * Blueprints are enabled for all controllers by default, and they can be turned on or off
- * app-wide in `config/controllers.js`. The settings below are overrides provided specifically
- * for AuthController.
- *
- * NOTE:
- * REST and CRUD shortcut blueprints are only enabled if a matching model file
- * (`models/Auth.js`) exists.
- *
- * NOTE:
- * You may also override the logic and leave the routes intact by creating your own
- * custom middleware for AuthController's `find`, `create`, `update`, and/or
- * `destroy` actions.
- */
- 
-module.exports.blueprints = {
- 
-	// Expose a route for every method,
-	// e.g.
-	// `/auth/foo` =&gt; `foo: function (req, res) {}`
-	actions: true,
- 
-	// Expose a RESTful API, e.g.
-	// `post /auth` =&gt; `create: function (req, res) {}`
-	rest: true,
- 
-	// Expose simple CRUD shortcuts, e.g.
-	// `/auth/create` =&gt; `create: function (req, res) {}`
-	// (useful for prototyping)
-	shortcuts: true
- 
-};
+module.exports = AuthController;

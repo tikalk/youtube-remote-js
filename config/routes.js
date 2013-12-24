@@ -28,21 +28,21 @@
 
 module.exports.routes = {
 
-  '/login': {
-    controller: 'AuthController',
-    action: 'login'
+  '/' : {
+    controller : 'home'
   },
 
-  '/process': {
-    controller: 'AuthController',
-    action: 'process',
+  '/login' : {
+    controller : 'auth',
+    action     : 'index'
   },
 
-  '/logout': {
-    controller: 'AuthController',
-    action: 'logout'
-  },
+  '/logout' : {
+    controller : 'auth',
+    action     : 'logout'
+  }
 
+  /*
   // By default, your root route (aka home page) points to a view
   // located at `views/home/index.ejs`
   // 
@@ -51,7 +51,6 @@ module.exports.routes = {
     view: 'home/index'
   }
 
-  /*
   // But what if you want your home page to display
   // a signup form located at `views/user/signup.ejs`?
   '/': {
@@ -96,14 +95,13 @@ module.exports.routes = {
 
 
   // What about the ever-popular "vanity URLs" aka URL slugs?
-  // (you might remember doing this with `mod_rewrite` in Apache)
+  // (you remember doing this with `mod_rewrite` in PHP)
   //
   // This is where you want to set up root-relative dynamic routes like:
-  // http://yourwebsite.com/twinkletoez
+  // http://yourwebsite.com/twinkletoezz993
   //
-  // NOTE:
-  // You'll still want to allow requests through to the static assets,
-  // so we need to set up this route to ignore URLs that have a trailing ".":
+  // You still want to allow requests through to the static assets,
+  // So we need to set up this route to allow URLs through that have a trailing ".":
   // (e.g. your javascript, CSS, and image files)
   'get /*(^.*)': 'UserController.profile'
 
@@ -112,12 +110,7 @@ module.exports.routes = {
 
 
 
-/** 
- * (3) Action blueprints
- * These routes can be disabled by setting (in `config/controllers.js`):
- * `module.exports.controllers.blueprints.actions = false`
- *
- * All of your controllers ' actions are automatically bound to a route.  For example:
+/** (3) Action blueprints * * These routes can be disabled by setting( in config / controllers.js): * `module.exports.controllers.blueprints.actions = false` * * All of your controllers ' actions are automatically bound to a route.  For example:
  *   + If you have a controller, `FooController`:
  *     + its action `bar` is accessible at `/foo/bar`
  *     + its action `index` is accessible at `/foo/index`, and also `/foo`
@@ -125,7 +118,18 @@ module.exports.routes = {
 
 
 /**
- * (4) Shortcut CRUD blueprints
+ * (4) View blueprints
+ *
+ * These routes can be disabled by setting (in config/controllers.js):
+ *		`module.exports.views.blueprints = false`
+ *
+ * If you have a view file at `/views/foo/bar.ejs`, it will be rendered and served
+ * automatically via the route:  `/foo/bar`
+ *
+ */
+
+/**
+ * (5) Shortcut CRUD blueprints
  *
  * These routes can be disabled by setting (in config/controllers.js)
  *			`module.exports.controllers.blueprints.shortcuts = false`
@@ -143,7 +147,7 @@ module.exports.routes = {
  */
 
 /**
- * (5) REST blueprints
+ * (6) REST blueprints
  *
  * These routes can be disabled by setting (in config/controllers.js)
  *		`module.exports.controllers.blueprints.rest = false`
@@ -162,7 +166,7 @@ module.exports.routes = {
  */
 
 /**
- * (6) Static assets
+ * (7) Static assets
  *
  * Flat files in your `assets` directory- (these are sometimes referred to as 'public')
  * If you have an image file at `/assets/images/foo.jpg`, it will be made available
@@ -173,8 +177,6 @@ module.exports.routes = {
 
 
 /**
- * (7) 404 (not found) handler
- *
  * Finally, if nothing else matched, the default 404 handler is triggered.
  * See `config/404.js` to adjust your app's 404 logic.
  */
