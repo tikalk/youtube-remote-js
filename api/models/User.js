@@ -8,7 +8,7 @@
 
 module.exports = {
 
-    adapter: 'mongo',
+    adapter: 'disk',
 
     attributes	: {
         provider: 'STRING',
