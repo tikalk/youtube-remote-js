@@ -28,6 +28,21 @@
 
 module.exports.routes = {
 
+  '/login': {
+    controller: 'AuthController',
+    action: 'login'
+  },
+
+  '/process': {
+    controller: 'AuthController',
+    action: 'process',
+  },
+
+  '/logout': {
+    controller: 'AuthController',
+    action: 'logout'
+  },
+
   // By default, your root route (aka home page) points to a view
   // located at `views/home/index.ejs`
   // 
