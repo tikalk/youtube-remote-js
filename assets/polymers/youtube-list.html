@@ -1,102 +1,145 @@
 <polymer-element name="youtube-list" attributes="uid">
-  <style type="text/css">
-    .youtube-media img {
-      float: left;
-    }
-  </style>
-  <template>
+<style type="text/css">
+.youtube-media section .th {
+	float: left;
+	margin: 0 8px 8px 0;
+}
+.youtube-media section {
+	min-height: 110px;
+	max-height: 110px;
+	overflow: auto;
+}
 
-    <form id="search">  
-      <div class="panel">
-        <input id="query" class="search" type="search" placeholder="search youtube..."></input>
-      </div>
-    </form>
+</style>
+<template>
 
-    <div>
-      <template id="yt-list" repeat="{{item in items}}">
-          <div class="panel youtube-media">
-        <h2>{{item.snippet.title}}</h2>
-        <p>
-          <img src="{{item.snippet.thumbnails.default.url}}">
-          {{item.snippet.description}}
-        </p>
-        <button on-click="{{handleClick}}" videoid="{{item.id.videoId}}">play</button>
+<form id="search">  
+	<div class="">
+		<input id="query" class="search" type="search" placeholder="search youtube..."></input>
+		<div class="success">{{loading}}</div>
+	</div>
+</form>
 
-        <button on-click="{{handleStop}}">stop</button>
-      </template>
-    </div>
-  </template>
-  <script>
-    Polymer('youtube-list', {
-      ready: function() {
-        var that = this;
-        this.items = [{
-            snippet: {
-              title: 'loading...',
-              description: ''
-            }
-          }
-        ];
-        this.$.search.addEventListener('submit', function(ev){
-          that.query(that.$.query.value);
-          ev.preventDefault();
-        });
+<div class="panel youtube-search">
+	<h4>Now Playing:</h4>
+	<p>
+		{{nowPlaying}}
+	</p>
+	<button class="button tiny" on-click="{{handleStop}}">
+		<i class="fa fa-stop"></i>
+		stop
+	</button>
+	<button class="button tiny success" on-click="{{handlePlayCurrent}}">
+		<i class="fa fa-play-circle"></i>
+		play
+	</button>
+</div>
+<ul class="youtube-list small-block-grid-1 medium-block-grid-2 large-block-grid-5">
+	<template id="yt-list" repeat="{{item in items}}">
+		<li class="youtube-media">
+			<div class="panel">
+				<h2 on-click="{{handleClick}}" videoid="{{item.id.videoId}}">{{item.snippet.title}}</h2>
+				<section>
+					<div class="th">
+						<img src="{{item.snippet.thumbnails.default.url}}" on-click="{{handleClick}}" videoid="{{item.id.videoId}}">
+					</div>
+				{{item.snippet.description}}
+				</section>
+				<div class="button-group">
+					<button class="button tiny success" on-click="{{handleClick}}" videoid="{{item.id.videoId}}">
+						<i class="fa fa-play-circle"></i>
+						play
+					</button>
+				</div>
+			</div>
+		</li>
+	</template>
+</ul>
+</template>
+<script>
+Polymer('youtube-list', {
+	ready: function() {
+	  var that = this;
+	  this.nowPlaying = 'choose something below...';
+	  this.items = [{
+		snippet: {
+		  title: 'loading...',
+		  description: ''
+	  }
+  }
+  ];
+  this.$.search.addEventListener('submit', function(ev){
+	that.query(that.$.query.value);
+	ev.preventDefault();
+});
 
-        this.query('');
-      },
+  this.query('');
+},
 
-      handleClick: function (ev) {
-        this.play(ev.target.getAttribute('videoid'));
-      },
+handleClick: function (ev) {
+  this.play(ev.target.getAttribute('videoid'));
+},
 
-      handleStop: function(ev) {
-        this.stop();
-      },
+handleStop: function(ev) {
+  this.stop();
+},
 
-      query: function(q){
-        var that = this;
-        $.ajax({
-          url: '/search/list?q=' + q,
-          success: function(res){  
-            that.items = res.items;
-            }
-        })
-      },
+handlePlayCurrent: function (ev) {
+	this.play(this.nowPlayingId);
+},
 
-      play: function(videoId){
-        var that = this;
-        sendCmd('clientList', {}, function(uuid){
+query: function(q){
+  var that = this;
+  this.loading = "finding your query now...";
+  $.ajax({
+	url: '/search/list?q=' + q,
+	success: function(res){  
+	  that.items = res.items;
+	  that.loading = '';
+  }
+})
+},
 
-            console.log(uuid);
+play: function(videoId){
+  var that = this;
+  this.nowPlayingId = videoId;
+  this.items.forEach(function(item){
+  	if (item.id.videoId === videoId) {
+  		that.nowPlaying = item.snippet.title;
+  	}
+  });
+  sendCmd('clientList', {}, function(uuid){
 
-            uuid.forEach(function(uuid){
-              if(socket.uuid == uuid) return;
-              sendCmd('play', {
-                target: uuid, 
-                vidId: videoId,
-                uid: that.uid
-              });
-            });
+	console.log(uuid);
 
-        });
-      },
+	uuid.forEach(function(uuid){
+	  if(socket.uuid == uuid) return;
+	  sendCmd('play', {
+		target: uuid, 
+		vidId: videoId,
+		uid: that.uid
+	});
+  });
 
-      stop: function(){
-        var that = this;
-        sendCmd('clientList', {}, function(uuid){
+});
+},
 
-            console.log(uuid);
+stop: function(){
+  var that = this;
+  sendCmd('clientList', {}, function(uuid){
 
-            uuid.forEach(function(uuid){
-              if(socket.uuid == uuid) return;
-              sendCmd('stop', {
-                target: uuid, 
-                uid: that.uid
-              });
-            });
+	console.log(uuid);
 
-        });
-      }
-    });
-  </script>
+	uuid.forEach(function(uuid){
+	  if(socket.uuid == uuid) return;
+	  sendCmd('stop', {
+		target: uuid, 
+		uid: that.uid
+	});
+  });
+
+});
+}
+});
+</script>
 </polymer-element>
