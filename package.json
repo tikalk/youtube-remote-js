@@ -14,7 +14,8 @@
 		"passport-google-oauth": "0.1.5",
 		"sails-mongo": "0.9.3",
 		"passport-facebook": "~1.0.2",
-		"googleapis": "~0.4.7"
+        "googleapis": "~0.4.7",
+        "uuid": "latest"
     },
     "scripts": {
         "start": "node app.js",

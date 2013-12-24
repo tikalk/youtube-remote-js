@@ -27,6 +27,11 @@ var youtubeHandler = GapiHandler.create({
 });
 
 module.exports = {
+    sockettest: function sockettest(req, res){
+        return res.view({
+          title: "the socket test module..."
+        });
+    },
     
   index: function function_name (req, res) {
     return res.view({
