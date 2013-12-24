@@ -18,14 +18,14 @@
             <a href="javascript:void callPlayer('player1','playVideo', {'id': 'NTz7v4omi2c'})">Start_another</a> &bull;
             <br /><br />
             <div id="player">
-                <iframe id="player1" width="640" height="390" frameborder="0" title="YouTube video player" type="text/html" src="http://www.youtube.com/embed/u1zgFlCw8Aw?enablejsapi=1&origin=*"></iframe>
+                <iframe id="player1" width="640" height="390" frameborder="0" title="YouTube video player" type="text/html" src="http://www.youtube.com/embed/u1zgFlCw8Aw?autoplay=1&enablejsapi=1&origin=*"></iframe>
             </div>
             <script>
                 var current_volume = 100;
 
                 function callPlayer(frame_id, func, args) {
                     if ($("iframe").attr("src").indexOf(args["id"]) < 0) {
-                        $("iframe").attr("src", "http://www.youtube.com/embed/" + args["id"] + "?enablejsapi=1&origin=*");
+                        $("iframe").attr("src", "http://www.youtube.com/embed/" + args["id"] + "?autoplay=1&enablejsapi=1&origin=*");
                         current_volume = 100;
                     }
                     if (func == 'setVolume') {
@@ -54,14 +54,16 @@
                 }
                 Polymer("player-element", {
                     ready: function() {
-                        socket.on('play', function(vidId) {
-                            callPlayer('player1','playVideo', {'id': vidId});
+                        var id = null
+                        socket.on('play', function(data) {
+                            id = data.vidId;
+                            callPlayer('player1','playVideo', {'id': data.vidId});
                         });
-                        socket.on('stop', function(vidId) {
-                            callPlayer('player1','stopVideo', {'id': vidId});
+                        socket.on('stop', function() {
+                            callPlayer('player1','stopVideo', {'id': id});
                         });
-                        socket.on('pause', function(vidId) {
-                            callPlayer('player1','pauseVideo', {'id': vidId});
+                        socket.on('pause', function() {
+                            callPlayer('player1','pauseVideo', {'id': id});
                         });
                     }
                 })

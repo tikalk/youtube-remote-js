@@ -1,62 +1,13 @@
 <script src="bower_components/platform/platform.js"></script>
 <link rel="import"
 		href="bower_components/polymer-ui-tabs/polymer-ui-tabs.html">
-
-	<!-- Header and Nav 2 -->
-	<nav class="top-bar" data-topbar>
-		<ul class="title-area">
-			<!-- Title Area -->
-			<li class="name">
-				<h1>
-					<a href="#">
-						Youtube Searcher...
-					</a>
-				</h1>
-			</li>
-			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-		</ul>
- 
-		<section class="top-bar-section">
-			<!-- Left Nav Section -->
-			<ul class="left">
-				<li class="divider"></li>
-				<li class="has-dropdown">
-					<a class="active" href="#">Main Item 1</a>
-					<ul class="dropdown">
-						<li><label>Section Name</label></li>
-						<li><a href="#" class="">Dropdown Level 1</a></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li class="divider"></li>
-						<li><label>Section Name</label></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li class="divider"></li>
-						<li><a href="#">See all →</a></li>
-					</ul>
-				</li>
-				<li class="divider"></li>
-				<li><a href="#">Main Item 2</a></li>
-				<li class="divider"></li>
-				<li class="has-dropdown">
-					<a href="#">Main Item 3</a>
-					<ul class="dropdown">
-						<li><a href="#">Dropdown Option</a></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li><a href="#">Dropdown Option</a></li>
-						<li class="divider"></li>
-						<li><a href="#">See all →</a></li>
-					</ul>
-				</li>
-			 
-			</ul>
- 
-		</section>
-	</nav>
 	
 	<!-- Footer -->
- 	<youtube-list uid="<%= user.uid %>"></youtube-list>
+    <div class="row">
+		<div class="large-12 columns">
+ 	        <youtube-list uid="<%= user.uid %>"></youtube-list>
+        </div>
+    </div>
 
 	<footer class="row">
 		<div class="large-12 columns">
