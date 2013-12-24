@@ -40,6 +40,29 @@ function sendCommand(res, command, playerId, vidId) {
         );
     }
 }
+
+process.on('socket.clientList', function(data){
+	console.log('socket.clientList', data);
+	var service = require('../services/socket');
+	service.findPlayer(data.id).socket.emit('clientList', service.listClients());
+});
+
+process.on('socket.play', function(data){
+	console.log('socket.play', data);
+	var service = require('../services/socket');
+	var target = service.findPlayer(data.data.target);
+	if(!target) return;
+	target.socket.emit('play', data.data.vidId);
+});
+
+process.on('socket.stop', function(data){
+	console.log('socket.stop', data);
+	var service = require('../services/socket');
+	var target = service.findPlayer(data.data.target);
+	if(!target) return;
+	target.socket.emit('stop', 'stop');
+});
+
 module.exports = {
     /**
      * Action blueprints:

@@ -5,6 +5,13 @@
     }
   </style>
   <template>
+
+      <form id="playerhook"
+    >   <div class='panel'>
+          <input type="text" id="hookid" placeholder="enter player id">
+        </div>
+      </form>
+
     <form id="search">  
       <div class="panel">
         <input id="query" class="search" type="search" placeholder="search youtube..."></input>
@@ -20,6 +27,8 @@
           {{item.snippet.description}}
         </p>
         <button on-click="{{handleClick}}" videoid="{{item.id.videoId}}">play</button>
+
+        <button on-click="{{handleStop}}">stop</button>
       </template>
     </div>
   </template>
@@ -38,12 +47,21 @@
           that.query(that.$.query.value);
           ev.preventDefault();
         });
+
+        this.$.playerhook.addEventListener('submit', function(ev){
+          that.ytPlayerId = that.$.hookid.value;
+          ev.preventDefault();
+        });
         this.query('pearl jam');
       },
 
       handleClick: function (ev) {
         this.play(ev.target.getAttribute('videoid'));
       },
+
+      handleStop: function(ev) {
+        this.stop();
+      }
 
       query: function(q){
         var that = this;
@@ -56,13 +74,29 @@
       },
 
       play: function(videoId){
-        $.ajax({
-          type: 'POST',
-          url: '/player/play/uuid',
-          data: {
-            vidId: videoId
-          }
-        })
+        sendCmd('clientList', {}, function(uuid){
+
+            console.log(uuid);
+
+            uuid.forEach(function(uuid){
+              if(socket.uuid == uuid) return;
+              sendCmd('play', {target: uuid, vidId: videoId});
+            });
+
+        });
+      },
+
+      stop: function(){
+        sendCmd('clientList', {}, function(uuid){
+
+            console.log(uuid);
+
+            uuid.forEach(function(uuid){
+              if(socket.uuid == uuid) return;
+              sendCmd('stop', {target: uuid});
+            });
+
+        });
       }
     });
   </script>
