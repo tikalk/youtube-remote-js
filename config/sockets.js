@@ -8,8 +8,23 @@
  * http://sailsjs.org/#documentation
  */
 
+var socketService = require('../api/services/socket.js');
+
 module.exports.sockets = {
 
+  // This custom onConnect function will be run each time AFTER a new socket connects
+  // (To control whether a socket is allowed to connect, check out `authorization` config.)
+  // Keep in mind that Sails' RESTful simulation for sockets 
+  // mixes in socket.io events for your routes and blueprints automatically.
+  onConnect: socketService.onConnect,
+
+  // This custom onDisconnect function will be run each time a socket disconnects
+  onDisconnect: socketService.onDisconnect,
+
+
+
+  // `transports`
+  //
   // A array of allowed transport methods which the clients will try to use.
   // The flashsocket transport is disabled by default
   // You can enable flashsockets by adding 'flashsocket' to this list:

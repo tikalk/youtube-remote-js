@@ -1,0 +1,154 @@
+<script src="bower_components/platform/platform.js"></script>
+<link rel="import"
+		href="bower_components/polymer-ui-tabs/polymer-ui-tabs.html">
+
+<link rel="import"
+		href="polymers/youtube-media.html">
+
+	<!-- Header and Nav 2 -->
+	<nav class="top-bar" data-topbar>
+		<ul class="title-area">
+			<!-- Title Area -->
+			<li class="name">
+				<h1>
+					<a href="#">
+						Top Bar Title 
+					</a>
+				</h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+		</ul>
+ 
+		<section class="top-bar-section">
+			<!-- Left Nav Section -->
+			<ul class="left">
+				<li class="divider"></li>
+				<li class="has-dropdown">
+					<a class="active" href="#">Main Item 1</a>
+					<ul class="dropdown">
+						<li><label>Section Name</label></li>
+						<li><a href="#" class="">Dropdown Level 1</a></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li class="divider"></li>
+						<li><label>Section Name</label></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li class="divider"></li>
+						<li><a href="#">See all →</a></li>
+					</ul>
+				</li>
+				<li class="divider"></li>
+				<li><a href="#">Main Item 2</a></li>
+				<li class="divider"></li>
+				<li class="has-dropdown">
+					<a href="#">Main Item 3</a>
+					<ul class="dropdown">
+						<li><a href="#">Dropdown Option</a></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li><a href="#">Dropdown Option</a></li>
+						<li class="divider"></li>
+						<li><a href="#">See all →</a></li>
+					</ul>
+				</li>
+			 
+			</ul>
+ 
+		</section>
+	</nav>
+ 
+ 
+	<!-- End Header and Nav -->
+ 
+	<!-- Main Grid Section -->
+ 
+	<div class="row">
+ 
+		<div class="large-3 columns">
+			<youtube-media></youtube-media>
+			<div class="panel socket-test" style="min-width: 500px;">
+				<h5>Socket.IO test</h5>
+				Last Response: <textarea style="min-height: 300px"></textarea>
+				<script>
+				console.log('here');
+				(function ready(){
+					if(typeof socket == 'undefined'){
+						document.addEventListener('DOMContentLoaded', ready);
+						return;
+					}
+					console.log('ready');
+					
+					
+					socket.on('response', function(data) {
+						console.log('response', data);
+						var debugStr = data;
+						try{
+							debugStr = JSON.stringify(data, null, '\t');
+						} catch(e){}
+						document.querySelector('.socket-test textarea').value = debugStr;
+						switch(data.action){
+						case 'uuid':
+							uuid(data);
+							break;
+						case 'response':
+							break;
+						default:
+							console.log('unknown action', data.action);
+							break;
+						}
+					});
+					
+					function sendInit(){
+						console.log('send');
+						socket.emit('init', 'init');
+					}
+					
+					function uuid(data){
+						console.log('my uuid is', data.uuid);
+						socket.uuid = data.uuid;
+					}
+					
+					window.sendCmd = function(cmd, data, cb) {
+						socket.emit('cmd', {
+							cmd: cmd,
+							id: socket.uuid,
+							data: data
+						});
+						socket.once(cmd, cb);
+					};
+					
+					sendInit();
+				})();
+				</script>
+			</div>
+		</div>
+	 
+ 
+	</div>
+ 
+	<!-- End Grid Section -->
+ 
+ 
+ 
+	<!-- Footer -->
+ 
+	<footer class="row">
+		<div class="large-12 columns">
+			<hr />
+			<div class="row">
+				<div class="large-6 columns">
+					<p>© Copyright no one at all. Go to town.</p>
+				</div>
+				<div class="large-6 columns">
+					<ul class="inline-list right">
+						<li><a href="#">Section 1</a></li>
+						<li><a href="#">Section 2</a></li>
+						<li><a href="#">Section 3</a></li>
+						<li><a href="#">Section 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+		

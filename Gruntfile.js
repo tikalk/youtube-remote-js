@@ -414,6 +414,10 @@ module.exports = function (grunt) {
       },
       views: {
         files: ['views/**/*']
+      },
+      config: {
+          files: ['config/**/*'],
+          tasks: ['default']
       }
     }
   });
