@@ -1,4 +1,4 @@
-<polymer-element name="youtube-list">
+<polymer-element name="youtube-list" attributes="uid">
   <style type="text/css">
     .youtube-media img {
       float: left;
@@ -6,8 +6,8 @@
   </style>
   <template>
 
-      <form id="playerhook"
-    >   <div class='panel'>
+      <form id="playerhook">   
+        <div class='panel'>
           <input type="text" id="hookid" placeholder="enter player id">
         </div>
       </form>
@@ -61,7 +61,7 @@
 
       handleStop: function(ev) {
         this.stop();
-      }
+      },
 
       query: function(q){
         var that = this;
@@ -74,26 +74,35 @@
       },
 
       play: function(videoId){
+        var that = this;
         sendCmd('clientList', {}, function(uuid){
 
             console.log(uuid);
 
             uuid.forEach(function(uuid){
               if(socket.uuid == uuid) return;
-              sendCmd('play', {target: uuid, vidId: videoId});
+              sendCmd('play', {
+                target: uuid, 
+                vidId: videoId,
+                uid: that.uid
+              });
             });
 
         });
       },
 
       stop: function(){
+        var that = this;
         sendCmd('clientList', {}, function(uuid){
 
             console.log(uuid);
 
             uuid.forEach(function(uuid){
               if(socket.uuid == uuid) return;
-              sendCmd('stop', {target: uuid});
+              sendCmd('stop', {
+                target: uuid, 
+                uid: that.uid
+              });
             });
 
         });

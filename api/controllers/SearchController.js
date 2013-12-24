@@ -29,7 +29,8 @@ var youtubeHandler = GapiHandler.create({
 module.exports = { 
   index: function function_name (req, res) {
     return res.view({
-      title: "the search module..."
+      title: "the search module...",
+      user: req.user
     });
   },
   /**
