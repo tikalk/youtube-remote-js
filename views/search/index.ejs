@@ -2,9 +2,6 @@
 <link rel="import"
 		href="bower_components/polymer-ui-tabs/polymer-ui-tabs.html">
 
-<link rel="import"
-		href="polymers/youtube-media.html">
-
 	<!-- Header and Nav 2 -->
 	<nav class="top-bar" data-topbar>
 		<ul class="title-area">
@@ -12,7 +9,7 @@
 			<li class="name">
 				<h1>
 					<a href="#">
-						Top Bar Title 
+						Youtube Searcher...
 					</a>
 				</h1>
 			</li>
@@ -57,31 +54,10 @@
  
 		</section>
 	</nav>
- 
- 
-	<!-- End Header and Nav -->
- 
-	<!-- Main Grid Section -->
- 
-	<div class="row">
- 
-		<div class="large-3 columns">
-			<youtube-media></youtube-media>
-			<div class="panel">
-				<h5>Panel Title</h5>
-				<p>This is a three columns grid panel with an arbitrary height.</p>
-			</div>
-		</div>
-	 
- 
-	</div>
- 
-	<!-- End Grid Section -->
- 
- 
- 
+	
 	<!-- Footer -->
- 
+ 	<youtube-list></youtube-list>
+
 	<footer class="row">
 		<div class="large-12 columns">
 			<hr />
@@ -100,4 +76,10 @@
 			</div>
 		</div>
 	</footer>
-		
+
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="polymers/youtube-list.html">
+
+
+
