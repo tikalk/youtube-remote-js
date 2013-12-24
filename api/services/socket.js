@@ -31,16 +31,21 @@ process.on('socket.plus', function(data){
 
 module.exports = {
 	onConnect: function(session, socket) {
-	console.log('onConnect');
-	socket.on('init', function(data){
-		console.log('init', data);
-		init(socket, data);
-	});
-	//socket.emit('/abc', 'hello');
+		console.log('onConnect');
+		socket.on('message', function(){
+			console.log('socket.onMessage');
+		});
+		socket.on('init', function(data){
+			console.log('init', data);
+			init(socket, data);
+		});
 	},
 	onDisconnect: function(session, socket) {
 		console.log('socket disconnected %s', socket.uuid);
 		delete clients[socket.uuid];
 	},
-	findPlayer: findPlayer
+	findPlayer: findPlayer,
+	listClients: function(){
+		return Object.keys(clients);
+	}
 };
