@@ -1,0 +1,58 @@
+<script src="/bower_components/platform/platform.js"></script>
+<script type="text/javascript" src="/bower_components/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.youtube.com/player_api"></script>
+
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<!--<polymer-element name="player-element" class="play_or_not" attributes="id" constructor="PlayerElement">-->
+<polymer-element name="player-element">
+    <h1>Player</h1>
+    <a href="javascript:void callPlayer('player1','playVideo', {'id': 'u1zgFlCw8Aw'})">Start</a> &bull;
+    <a href="javascript:void callPlayer('player1','pauseVideo', {'id': 'u1zgFlCw8Aw'})">Pause</a> &bull;
+    <a href="javascript:void callPlayer('player1','stopVideo', {'id': 'u1zgFlCw8Aw'})">Stop</a> &bull;
+    <a href="javascript:void callPlayer('player1','setVolume', {'id': 'u1zgFlCw8Aw', 'direction': 'up'})">Volume up</a> &bull;
+    <a href="javascript:void callPlayer('player1','setVolume', {'id': 'u1zgFlCw8Aw', 'direction': 'down'})">Volume down</a> &bull;
+    <a href="javascript:void callPlayer('player1','playVideo', {'id': 'tKpwMkWV6e4'})">Start_another</a> &bull;
+    <a href="javascript:void callPlayer('player1','playVideo', {'id': 'NTz7v4omi2c'})">Start_another</a> &bull;
+    <br /><br />
+    <div id="player">
+        <iframe id="player1" width="640" height="390" frameborder="0" title="YouTube video player" type="text/html" src="http://www.youtube.com/embed/u1zgFlCw8Aw?enablejsapi=1&origin=*"></iframe>
+    </div>
+    <script>
+        var current_volume = 100;
+
+        function callPlayer(frame_id, func, args) {
+            if ($("iframe").attr("src").indexOf(args["id"]) < 0) {
+                $("iframe").attr("src", "http://www.youtube.com/embed/" + args["id"] + "?enablejsapi=1&origin=*");
+                current_volume = 100;
+            }
+            if (func == 'setVolume') {
+                if (args["direction"] == 'up' && current_volume != 100) {
+                    current_volume = current_volume + 10;
+                }
+                if (args["direction"] == 'down' && current_volume != 0) {
+                    current_volume = current_volume - 10;
+                }
+                args = [current_volume];
+            }
+            if (window.jQuery && frame_id instanceof jQuery) frame_id = frame_id.get(0).id;
+            var iframe = document.getElementById(frame_id);
+            if (iframe && iframe.tagName.toUpperCase() != 'IFRAME') {
+                iframe = iframe.getElementsByTagName('iframe')[0];
+            }
+            if (iframe) {
+                // Frame exists,
+                iframe.contentWindow.postMessage(JSON.stringify({
+                    "event": "command",
+                    "func": func,
+                    "args": args || [],
+                    "id": frame_id
+                }), "*");
+            }
+        }
+    </script>
+</polymer-element>
+
+
+
+

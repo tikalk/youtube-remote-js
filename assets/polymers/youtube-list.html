@@ -6,12 +6,6 @@
   </style>
   <template>
 
-      <form id="playerhook">   
-        <div class='panel'>
-          <input type="text" id="hookid" placeholder="enter player id">
-        </div>
-      </form>
-
     <form id="search">  
       <div class="panel">
         <input id="query" class="search" type="search" placeholder="search youtube..."></input>
@@ -48,11 +42,7 @@
           ev.preventDefault();
         });
 
-        this.$.playerhook.addEventListener('submit', function(ev){
-          that.ytPlayerId = that.$.hookid.value;
-          ev.preventDefault();
-        });
-        this.query('pearl jam');
+        this.query('');
       },
 
       handleClick: function (ev) {

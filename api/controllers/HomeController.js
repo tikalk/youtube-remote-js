@@ -11,9 +11,16 @@ var HomeController = {
     {
 
         console.log(req.user);
-        res.view({
-            user: req.user
-        });
+        if (req.user) {
+            res.view({
+                user: req.user
+            });
+        }
+        else {
+            res.view({
+                layout: "not_authorized"
+            })
+        }
     }
 
 };
