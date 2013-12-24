@@ -52,7 +52,22 @@
                         }), "*");
                     }
                 }
+                Polymer("player-element", {
+                    ready: function() {
+                        socket.on('play', function(vidId) {
+                            callPlayer('player1','playVideo', {'id': vidId});
+                        });
+                        socket.on('stop', function(vidId) {
+                            callPlayer('player1','stopVideo', {'id': vidId});
+                        });
+                        socket.on('pause', function(vidId) {
+                            callPlayer('player1','pauseVideo', {'id': vidId});
+                        });
+                    }
+                })
             </script>
         </polymer-element>
     </div>
 </div>
+
+<player-element></player-element>
