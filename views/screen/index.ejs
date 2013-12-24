@@ -9,16 +9,19 @@
     <div class="large-12 columns">
         <polymer-element name="player-element">
             <h1>Player</h1>
-            <a href="javascript:void callPlayer('player1','playVideo', {'id': 'u1zgFlCw8Aw'})">Start</a> &bull;
-            <a href="javascript:void callPlayer('player1','pauseVideo', {'id': 'u1zgFlCw8Aw'})">Pause</a> &bull;
-            <a href="javascript:void callPlayer('player1','stopVideo', {'id': 'u1zgFlCw8Aw'})">Stop</a> &bull;
-            <a href="javascript:void callPlayer('player1','setVolume', {'id': 'u1zgFlCw8Aw', 'direction': 'up'})">Volume up</a> &bull;
-            <a href="javascript:void callPlayer('player1','setVolume', {'id': 'u1zgFlCw8Aw', 'direction': 'down'})">Volume down</a> &bull;
+            <a href="javascript:void callPlayer('player1','playVideo', {'id': '{{nowPlayingId}}'})">Start</a> &bull;
+            <a href="javascript:void callPlayer('player1','pauseVideo', {'id': '{{nowPlayingId}}'})">Pause</a> &bull;
+            <a href="javascript:void callPlayer('player1','stopVideo', {'id': '{{nowPlayingId}}'})">Stop</a> &bull;
+            <a href="javascript:void callPlayer('player1','setVolume', {'id': '{{nowPlayingId}}', 'direction': 'up'})">Volume up</a> &bull;
+            <a href="javascript:void callPlayer('player1','setVolume', {'id': '{{nowPlayingId}}', 'direction': 'down'})">Volume down</a> &bull;
             <a href="javascript:void callPlayer('player1','playVideo', {'id': 'tKpwMkWV6e4'})">Start_another</a> &bull;
             <a href="javascript:void callPlayer('player1','playVideo', {'id': 'NTz7v4omi2c'})">Start_another</a> &bull;
             <br /><br />
             <div id="player">
-                <iframe id="player1" width="640" height="390" frameborder="0" title="YouTube video player" type="text/html" src="http://www.youtube.com/embed/u1zgFlCw8Aw?autoplay=1&enablejsapi=1&origin=*"></iframe>
+                <iframe id="player1" width="640" height="390" frameborder="0" 
+                	title="YouTube video player" 
+                	type="text/html" 
+                	src="http://www.youtube.com/embed/bnVUHWCynig?autoplay=1&enablejsapi=1&origin=*"></iframe>
             </div>
             <script>
                 var current_volume = 100;
@@ -54,9 +57,11 @@
                 }
                 Polymer("player-element", {
                     ready: function() {
-                        var id = null
+                        var id = null;
+                        var that = this;
                         socket.on('play', function(data) {
                             id = data.vidId;
+                            nowPlayingId = data.vidId;
                             callPlayer('player1','playVideo', {'id': data.vidId});
                         });
                         socket.on('stop', function() {
@@ -65,6 +70,7 @@
                         socket.on('pause', function() {
                             callPlayer('player1','pauseVideo', {'id': id});
                         });
+				        callPlayer('player1','stopVideo', {'id': 'bnVUHWCynig'});
                     }
                 })
             </script>
