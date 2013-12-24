@@ -52,7 +52,7 @@ process.on('socket.play', function(data){
 	var service = require('../services/socket');
 	var target = service.findPlayer(data.data.target);
 	if(!target) return;
-	target.socket.emit('play', data.data.vidId);
+	target.socket.emit('play', {vidId: data.data.vidId, uid: data.data.uid});
 });
 
 process.on('socket.stop', function(data){
@@ -60,7 +60,7 @@ process.on('socket.stop', function(data){
 	var service = require('../services/socket');
 	var target = service.findPlayer(data.data.target);
 	if(!target) return;
-	target.socket.emit('stop', 'stop');
+	target.socket.emit('stop', {uid: data.data.uid});
 });
 
 module.exports = {
