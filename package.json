@@ -1,7 +1,7 @@
 {
     "name": "app",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.0.0-6",
     "description": "a Sails application",
     "dependencies": {
         "sails": "0.9.7",
@@ -9,11 +9,11 @@
         "sails-disk": "~0.9.0",
         "ejs": "0.8.4",
         "optimist": "0.3.4",
-		"passport": "0.1.17",
+        "passport": "0.1.17",
         "passport-github": "0.1.5",
-		"passport-google-oauth": "0.1.5",
-		"sails-mongo": "0.9.3",
-		"passport-facebook": "~1.0.2",
+        "passport-google-oauth": "0.1.5",
+        "sails-mongo": "0.9.3",
+        "passport-facebook": "~1.0.2",
         "googleapis": "~0.4.7",
         "uuid": "latest"
     },
@@ -30,4 +30,3 @@
         "node": "0.10.x"
     }
 }
-
