@@ -1,99 +1,96 @@
-<div class="row">
-		<div class="large-12 columns">
-
-
-				<!-- Mobile Header -->
-
-
-				<div class="row">
-					<div class="small-12 show-for-small"><br>
-						<img src="http://placehold.it/1000x600&text=For Small Screens" />
-				</div>
-		</div>
-
-
-		<!-- End Mobile Header -->
-
-</div>
-</div>
-
-
-
+<style type="text/css">
+    .tools {
+        margin-top: 40px;
+    }
+    .tools .subheader i{
+        font-size: 3.5em;
+    }
+    .tools .subheader a {
+        height: 100px;
+    }
+</style>
 <div class="row">
 
+    <div class="large-12 columns">
+        <div class="row">
 
-		<div class="large-12 columns">
-			<div class="row">
+            <!-- Content -->
+            <div class="large-8 columns">
+                <div class="panel radius tools">
 
-				<!-- Content -->
+                    <div class="row">
+                       <div class="large-6 small-4 columns">
 
-				<div class="large-8 columns">
-					<div class="panel radius">
+                          <h5 class="subheader">
+                            <a href="/search" class="success small radius button">
+                                <i class="fa fa-mobile-phone"></i> Remote Control
+                            </a>
+                            </h5>
+                        </div>
+                        
+                        <div class="large-6 small-4 columns">
+                            <h5 class="subheader">
+                                <a href="/screen" class="small radius button">
+                                    <i class=" fa fa-youtube-play"></i> Watch it!
+                                </a>
+                            </h5>
 
-							<div class="row">
-									<div class="large-6 small-6 columns">
+                        </div>
+                        
 
-										<h4>Remote</h4><hr/>
-										<h5 class="subheader">
-												<a href="/search" class="small radius button">Control</a>
-										</h5>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 small-12 columns">
+                            <p>
+                            watch &amp; control youtube videos on any device
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-										<h4>Screen</h4><hr/>
-										<h5 class="subheader">
-												<a href="/screen" class="small radius button">Watch it!</a>
-										</h5>
-
-								</div>
-								<div class="large-6 small-6 columns">
-										<p>
-												watch &amp; control youtube videos on any device
-										</p>
-								</div>
-
-						</div>
-				</div>
-		</div>
-
-		<h2>Hi <%= user.name %></h1>
-		<a class="btn" href="/logout">Logout</a>
-		<table class="table">
-			<% for(key in user.toJSON() ) { %>
-			<tr>
-				<td><%= key %>: </td>
-				<td class="boxy"><%= user[key] %></td>
-			</tr>
-			<% } %>
-		</table>
-
-		<div class="large-4 columns hide-for-small">
-
-			<h4>Credits</h4><hr/>
-			<p>
-					Tikal's Javascript Team
-			</p>
-		</div>
-
-<!-- End Content -->
-
-</div>
-</div>
+            <div class="columns large-4">
+                <div class="panel">
+                    <h2>Hi <%= user.name %></h2>
+                    <a class="btn" href="/logout">Logout</a>
+                    <table class="table">
+                        <% for(key in user.toJSON() ) { %>
+                        <tr>
+                            <td><%= key %>: </td>
+                            <td class="boxy"><%= user[key] %></td>
+                        </tr>
+                        <% } %>
+                    </table>
+            
+                    <div class="large-4 columns hide-for-small">
+            
+                        <h4>Credits</h4><hr/>
+                        <p>
+                            Tikal's Javascript Team
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Footer -->
 
 <footer class="row">
-		<div class="large-12 columns">
-			<hr>
-			<div class="row">
-				<div class="large-6 columns">
-					<p>© Tikal Knowledge</p>
-			</div>
-			<div class="large-6 columns">
-					<ul class="inline-list right">
-						<li><a href="http://tikalk.com">Tikal</a></li>
-						<li><a href="http://tikalk.com/js">Tikal Javascript Page</a></li>
-				</ul>
-		</div>
-</div>
+  <div class="large-12 columns">
+     <hr>
+     <div class="row">
+        <div class="large-6 columns">
+           <p>© Tikal Knowledge</p>
+       </div>
+       <div class="large-6 columns">
+           <ul class="inline-list right">
+              <li><a href="http://tikalk.com">Tikal</a></li>
+              <li><a href="http://tikalk.com/js">Tikal Javascript Page</a></li>
+          </ul>
+      </div>
+  </div>
 </div>
 </footer>

@@ -21,7 +21,7 @@
                 <iframe id="player1" width="640" height="390" frameborder="0" 
                 	title="YouTube video player" 
                 	type="text/html" 
-                	src="http://www.youtube.com/embed/bnVUHWCynig?autoplay=1&enablejsapi=1&origin=*"></iframe>
+                	src="http://www.youtube.com/embed/bnVUHWCynig?enablejsapi=1&origin=*"></iframe>
             </div>
             <script>
                 var current_volume = 100;
@@ -70,7 +70,7 @@
                         socket.on('pause', function() {
                             callPlayer('player1','pauseVideo', {'id': id});
                         });
-				        callPlayer('player1','stopVideo', {'id': 'bnVUHWCynig'});
+				        // callPlayer('player1','stopVideo', {'id': 'bnVUHWCynig'});
                     }
                 })
             </script>

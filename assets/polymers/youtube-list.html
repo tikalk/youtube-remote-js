@@ -9,14 +9,22 @@
 	max-height: 110px;
 	overflow: auto;
 }
-
+.youtube-search .button-group {
+	display: inline-block;
+}
+.youtube-search .controls.fixed {
+	text-align: right;
+	top: 45px;
+	right: 0;
+	padding-right: 15px;
+}
 </style>
 <template>
 
 <form id="search">  
 	<div class="">
 		<input id="query" class="search" type="search" placeholder="search youtube..."></input>
-		<div class="success">{{loading}}</div>
+		<div class="label success">{{loading}}</div>
 	</div>
 </form>
 
@@ -25,14 +33,19 @@
 	<p>
 		{{nowPlaying}}
 	</p>
-	<button class="button tiny" on-click="{{handleStop}}">
-		<i class="fa fa-stop"></i>
-		stop
-	</button>
-	<button class="button tiny success" on-click="{{handlePlayCurrent}}">
-		<i class="fa fa-play-circle"></i>
-		play
-	</button>
+
+	<div class="fixed controls">
+		<div class="button-group">
+			<button class="button tiny" on-click="{{handleStop}}">
+				<i class="fa fa-stop"></i>
+				stop
+			</button>
+			<button class="button tiny success" on-click="{{handlePlayCurrent}}">
+				<i class="fa fa-play-circle"></i>
+				play
+			</button>
+		</div>
+	</div>
 </div>
 <ul class="youtube-list small-block-grid-1 medium-block-grid-2 large-block-grid-5">
 	<template id="yt-list" repeat="{{item in items}}">

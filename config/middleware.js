@@ -64,9 +64,9 @@ module.exports = {
             ));
 
             passport.use(new GoogleStrategy({
-                    clientID: '357565005718-vhn2vi2mc6auo9ln1vno6u7qphu6r084.apps.googleusercontent.com',
-                    clientSecret: 'HPRDLF5p6NrffYGM6aOCSiFX',
-                    callbackURL: 'http://localhost:1337/auth/google/callback'
+                    clientID: '971861197531-2ro1jjtqdj6h1so31c0k4aaah0gii4a9.apps.googleusercontent.com',
+                    clientSecret: 'LNCaIbEcVYtUXdzzuqe-4ueX',
+                    callbackURL: 'http://localhost:8000/auth/google/callback'
                 },
                 verifyHandler
             ));
