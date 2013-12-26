@@ -62,12 +62,14 @@ module.exports = {
                 },
                 verifyHandler
             ));
-
+            var isLocalhost = process.env.PORT === 80;
+            var callbackURL = isLocalhost ? 
+                'http://tikalk-youtube-remote-js.nodejitsu.com/auth/google/callback':
+                'http://localhost:8000/auth/google/callback';
             passport.use(new GoogleStrategy({
                     clientID: '130570019401-cblp8glde6ssnj18vbaj4ircaa3eu164.apps.googleusercontent.com',
                     clientSecret: 'LB9rzywArIO9IKrPQnNPt5PI',
-                    // callbackURL: 'http://localhost:8000/auth/google/callback'
-                    callbackURL: 'http://tikalk-youtube-remote-js.nodejitsu.com/auth/google/callback'
+                    callbackURL: callbackURL
                 },
                 verifyHandler
             ));

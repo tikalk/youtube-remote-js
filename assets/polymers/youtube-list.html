@@ -1,3 +1,4 @@
+<link rel="import" href="../bower_components/polymer-ajax/polymer-ajax.html">
 <polymer-element name="youtube-list" attributes="uid">
 <style type="text/css">
 .youtube-media section .th {
@@ -68,6 +69,12 @@
 		</li>
 	</template>
 </ul>
+
+<polymer-ajax id="ajax" url="/search/list" 
+    params=''
+    handleAs="json"
+    on-polymer-response="{{handleResponse}}">
+</polymer-ajax>
 </template>
 <script>
 Polymer('youtube-list', {
@@ -81,6 +88,7 @@ Polymer('youtube-list', {
 	  }
   }
   ];
+
   this.$.search.addEventListener('submit', function(ev){
 	that.query(that.$.query.value);
 	ev.preventDefault();
@@ -104,13 +112,17 @@ handlePlayCurrent: function (ev) {
 query: function(q){
   var that = this;
   this.loading = "finding your query now...";
-  $.ajax({
-	url: '/search/list?q=' + q,
-	success: function(res){  
-	  that.items = res.items;
-	  that.loading = '';
-  }
-})
+  var params = {
+  	alt: "json",
+  	q: q
+  };
+  this.$.ajax.params = JSON.stringify(params);
+  this.$.ajax.go();
+},
+
+handleResponse: function(ev, res){
+	this.items = res.response.items;
+	this.loading = '';
 },
 
 play: function(videoId){
