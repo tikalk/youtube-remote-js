@@ -15,7 +15,6 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 var GapiHandler = require('../services/gapi');
-
 // Browser apps key
 var API_KEY='AIzaSyCgrK5ds9uCSRM-WBUFm8V8jPX66q8-Od0';
 
