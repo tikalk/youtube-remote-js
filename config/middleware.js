@@ -62,9 +62,9 @@ module.exports = {
                 },
                 verifyHandler
             ));
-            var isLocalhost = process.env.PORT === 80;
+            var isLocalhost = process.env.PORT !== 8000;
             var callbackURL = isLocalhost ? 
-                'http://tikalk-youtube-remote-js.nodejitsu.com/auth/google/callback':
+                'http://tikal-remotube.herokuapp.com/auth/google/callback':
                 'http://localhost:8000/auth/google/callback';
             passport.use(new GoogleStrategy({
                     clientID: '130570019401-cblp8glde6ssnj18vbaj4ircaa3eu164.apps.googleusercontent.com',
